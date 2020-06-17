@@ -171,7 +171,6 @@ More detailed information can be found in [these](./src/ql/core.cljc) [files](./
 ## Development
 
 ```
-source .env
 docker-compose up -d
 lein repl
 ```
