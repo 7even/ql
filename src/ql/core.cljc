@@ -72,12 +72,12 @@
 (defn sql [expr & [opts]]
   (let [res (->
              {:sql [] :pretty-sql [] :params [] :opts (merge default-opts opts)}
-             (to-sql  (if (map? expr)
-                        (update expr :ql/type (fn [x] (if x x :ql/select)))
-                        expr))
+             (to-sql (if (map? expr)
+                       (merge {:ql/type :ql/select} expr)
+                       expr))
              (update :sql (fn [x] (str/join " " x))))]
-     (case (:format opts)
-       :jdbc  (into [(:sql res)] (:params res))
-       :pretty (assoc res :sql (pretty-sql/make-pretty-sql (:pretty-sql res)))
-       res)))
+    (case (:format opts)
+      :jdbc   (into [(:sql res)] (:params res))
+      :pretty (assoc res :sql (pretty-sql/make-pretty-sql (:pretty-sql res)))
+      res)))
 

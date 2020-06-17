@@ -26,7 +26,7 @@
      :ql/type     :ql/select
      ;; selection
      :ql/select   {:alias :u.column}
-     ;; form {alias tbl | expression} 
+     ;; from {alias tbl | expression}
      :ql/from     {:u :user}
      ;; named conditions
      :ql/where    {:by-id {:ql/type :ql/= :left :u.id :right 5}}
@@ -42,10 +42,10 @@
    (ql/sql {:ql/with   {:_user  #:ql {:select :*
                                       :from   :user
                                       :where  [:ql/= :id [:ql/param 5]]}
-                        :_group {:ql/select :g.*
-                                 :ql/from   {:u :user}
-                                 :ql/joins  {:g {:ql/rel :group
-                                                 :ql/on  [:ql/= :g.user_id :u.id]}}}}
+                        :_group #:ql {:select :g.*
+                                      :from   {:u :user}
+                                      :joins  {:g {:ql/rel :group
+                                                   :ql/on  [:ql/= :g.user_id :u.id]}}}}
             :ql/select {:name :u.name :group :g.name} 
             :ql/from   {:u :_user :g :_group} 
             :ql/where  [:ql/= :g.user_id :u.id]})

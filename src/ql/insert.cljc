@@ -23,7 +23,7 @@
               (cond->
                   acc
                 prep (conj-sql prep)
-                true (to-sql  (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
+                true (to-sql (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
               acc))
           acc [{:key :ql/table_name
                 :token "INSERT INTO"}
@@ -39,7 +39,7 @@
               (cond->
                   acc
                 prep (conj-sql prep)
-                true (to-sql  (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
+                true (to-sql (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
               acc))
           acc [["TRUNCATE" :ql/table_name]]))
 
@@ -50,7 +50,7 @@
               (cond->
                   acc
                 prep (conj-sql prep)
-                true (to-sql  (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
+                true (to-sql (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
               acc))
           acc [[(str "DROP TABLE" (when (:ql/if-exists expr) " IF EXISTS")) :ql/table_name]]))
 
@@ -82,7 +82,7 @@
               (cond->
                   acc
                 prep (conj-sql prep)
-                true (to-sql  (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
+                true (to-sql (if (and (map? v) (not (:ql/type v))) (assoc v :ql/type k) v)))
               acc))
           acc [[(str "CREATE TABLE" (when (:ql/if-not-exists expr) " IF NOT EXISTS")) :ql/table_name]
                [nil :ql/columns]]))
