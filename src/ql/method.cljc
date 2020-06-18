@@ -21,7 +21,7 @@
 
 (defn conj-sql [acc & sql]
   (let [sql        (flatten sql)
-        plain-sql  (filter (complement pretty-sql/pretty-operations) sql)
+        plain-sql  (remove pretty-sql/pretty-operations sql)
         pretty-sql sql]
     (-> acc
         (update :sql (fn [x] (apply conj x plain-sql)))
